@@ -71,6 +71,5 @@ Ambos elementos permiten a ingenieros, planificadores y autoridades regulatorias
 - **Ing. Alex Alberto Varela Quirós**
 - ***Gestor de Redes Eléctricas  / Departamento de Ingeniería Eléctrica***
 - **COOPEALFARORUIZ R.L.**  
-- 📧 avarela@coopealfaroruiz.com  
-- 📞 +506 84634021  
+- 📧 avarela@coopealfaroruiz.com  / 📞 +506 84634021  
 ---

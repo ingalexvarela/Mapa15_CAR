@@ -1493,7 +1493,7 @@ rosaContainer.style.zIndex = "1000";
 
 
 var rosaImg = document.createElement("img");
-rosaImg.src = "https://github.com/ingalexvarela/Mapa15_CAR/blob/main/images/rosaT.png";
+rosaImg.src = "https://raw.githubusercontent.com/ingalexvarela/Mapa15_CAR/main/images/rosaT.png";
 rosaImg.style.width = "140px";
 rosaImg.style.height = "auto";
 rosaImg.style.opacity = "0.9";

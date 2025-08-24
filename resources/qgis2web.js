@@ -1529,7 +1529,7 @@ ayudaButton.style.border = "1px solid #666";
 ayudaButton.style.borderRadius = "5px";
 ayudaButton.style.background = "white";
 ayudaButton.addEventListener("click", function() {
-    window.open("https://raw.githubusercontent.com/ingalexvarela/Mapa15_CAR/main/images/README.html", "_blank");
+    window.open("https://ingalexvarela.github.io/Mapa15_CAR/images/README.html", "_blank");
 });
 
 // ==================== Contenedor de los tres botones ====================

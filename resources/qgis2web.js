@@ -1275,24 +1275,29 @@ searchInput.addEventListener('keypress', function(e) {
 // ============================
 // Búsqueda Medidores personalizada
 // ============================
-// ============================
-// Búsqueda Medidores personalizada
-// ============================
-
-// Capa de resaltado
+// ==================== Capa de resaltado ====================
 var highlightLayer = new ol.layer.Vector({
     source: new ol.source.Vector(),
-    style: new ol.style.Style({
-        image: new ol.style.Circle({
-            radius: 10,
-            fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
-            stroke: new ol.style.Stroke({ color: 'red', width: 2 })
-        })
-    })
+    style: function (feature) {
+        return new ol.style.Style({
+            image: new ol.style.Circle({
+                radius: 10,
+                fill: new ol.style.Fill({ color: 'rgba(255,0,0,0.5)' }),
+                stroke: new ol.style.Stroke({ color: 'red', width: 2 })
+            }),
+            text: new ol.style.Text({
+                text: feature.get('label') || '',
+                font: 'bold 14px Arial',
+                fill: new ol.style.Fill({ color: '#000' }),
+                stroke: new ol.style.Stroke({ color: '#fff', width: 3 }),
+                offsetY: -15
+            })
+        });
+    }
 });
 map.addLayer(highlightLayer);
 
-// Crear contenedor principal (OL control)
+// ==================== Contenedor principal (OL control) ====================
 var searchContainer = document.createElement('div');
 searchContainer.className = 'ol-control ol-unselectable';
 searchContainer.style.display = 'flex';
@@ -1307,7 +1312,7 @@ searchContainer.style.border = '1px solid #666';
 searchContainer.style.borderRadius = '5px';
 searchContainer.style.zIndex = 1000;
 
-// Botón principal para desplegar input
+// ==================== Botón principal ====================
 var toggleButton = document.createElement('button');
 toggleButton.innerHTML = '⚡';
 toggleButton.title = 'Buscar Medidor';
@@ -1319,9 +1324,7 @@ toggleButton.style.border = '1px solid #666';
 toggleButton.style.background = 'white';
 searchContainer.appendChild(toggleButton);
 
-
-
-// Panel interno con input, botón aplicar y botón cerrar
+// ==================== Panel interno ====================
 var inputPanel = document.createElement('div');
 inputPanel.style.display = 'none';
 inputPanel.style.flexDirection = 'row';
@@ -1340,13 +1343,13 @@ applyButton.innerHTML = 'Buscar';
 applyButton.style.cursor = 'pointer';
 applyButton.style.width = '70px';
 
-// Botón cerrar (X) más profesional
+// Botón cerrar
 var closeButton = document.createElement('button');
-closeButton.innerHTML = '&times;'; // símbolo más discreto
+closeButton.innerHTML = '&times;';
 closeButton.title = 'Cerrar búsqueda';
 closeButton.style.cursor = 'pointer';
-closeButton.style.background = '#f0f0f0'; // gris claro
-closeButton.style.color = '#333'; // texto gris oscuro
+closeButton.style.background = '#f0f0f0';
+closeButton.style.color = '#333';
 closeButton.style.border = '1px solid #ccc';
 closeButton.style.borderRadius = '50%';
 closeButton.style.width = '25px';
@@ -1357,7 +1360,7 @@ closeButton.style.alignItems = 'center';
 closeButton.style.justifyContent = 'center';
 closeButton.style.transition = '0.2s';
 
-// Efecto hover
+// Efectos hover
 closeButton.addEventListener('mouseenter', function() {
     closeButton.style.background = '#e0e0e0';
     closeButton.style.color = '#000';
@@ -1369,7 +1372,7 @@ closeButton.addEventListener('mouseleave', function() {
     closeButton.style.boxShadow = 'none';
 });
 
-// Agregamos elementos al panel
+// Agregar elementos al panel
 inputPanel.appendChild(inputMedidor);
 inputPanel.appendChild(applyButton);
 inputPanel.appendChild(closeButton);
@@ -1379,40 +1382,67 @@ searchContainer.appendChild(inputPanel);
 var customSearchControl = new ol.control.Control({ element: searchContainer });
 map.addControl(customSearchControl);
 
-// Mostrar/ocultar input al presionar toggleButton
+// Mostrar/ocultar input
 toggleButton.addEventListener('click', function() {
     inputPanel.style.display = (inputPanel.style.display === 'none') ? 'flex' : 'none';
 });
 
-// Función para buscar medidor y resaltar
+// ==================== Función de búsqueda ====================
 function buscarMedidor() {
-    var valor = inputMedidor.value.trim();
+    var valor = (inputMedidor.value || '').trim();
     if (!valor) return;
 
-    highlightLayer.getSource().clear();
+    // Limpiar resaltados anteriores
+    var hlSource = highlightLayer.getSource();
+    hlSource.clear();
 
-    var features = lyr_MedidoresF_2.getSource().getFeatures();
-    var encontrado = features.find(f => f.get('MEDIDOR') === valor);
+    // Obtener features de la capa de medidores
+    var src = lyr_MedidoresF_2.getSource();
+    var feats = src.getFeatures();
 
-    if (encontrado) {
-        var cloneFeature = encontrado.clone();
-        highlightLayer.getSource().addFeature(cloneFeature);
+    // Si aún no cargaron, esperar y reintentar
+    if (!feats || feats.length === 0) {
+        src.once('change', function () { buscarMedidor(); });
+        return;
+    }
 
-        var geometry = cloneFeature.getGeometry();
-        if (geometry) {
-            var view = map.getView();
-            var extent = geometry.getExtent();
-            var buffer = ol.extent.buffer(extent, 20);
-            view.fit(buffer, { maxZoom: 18, duration: 700 });
-        }
+    // Búsqueda tolerante a mayúsculas/espacios
+    var buscado = valor.toUpperCase();
+    var encontrado = feats.find(function (f) {
+        var v = String(f.get('MEDIDOR') ?? '').trim().toUpperCase();
+        return v === buscado;
+    });
 
-        alert('Seleccionaste el medidor: ' + valor);
-    } else {
+    if (!encontrado) {
         alert('Medidor no encontrado: ' + valor);
+        return;
+    }
+
+    // Clonar y etiquetar
+    var cloneFeature = encontrado.clone();
+    cloneFeature.set('label', String(encontrado.get('MEDIDOR') || valor));
+
+    // Agregar al resaltado
+    hlSource.addFeature(cloneFeature);
+
+    // Zoom al elemento
+    var geometry = cloneFeature.getGeometry();
+    if (geometry) {
+        var view = map.getView();
+        if (geometry instanceof ol.geom.Point) {
+            view.animate({
+                center: geometry.getCoordinates(),
+                zoom: Math.min(view.getMaxZoom() || 18, 18),
+                duration: 700
+            });
+        } else {
+            var padded = ol.extent.buffer(geometry.getExtent(), 50);
+            view.fit(padded, { maxZoom: 18, duration: 700, padding: [40, 40, 40, 40] });
+        }
     }
 }
 
-// Ejecutar búsqueda al presionar "Aplicar" o Enter
+// Ejecutar búsqueda
 applyButton.addEventListener('click', buscarMedidor);
 inputMedidor.addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
@@ -1420,12 +1450,29 @@ inputMedidor.addEventListener('keypress', function(e) {
     }
 });
 
-// Botón cerrar: oculta panel y limpia resaltado
+// Botón cerrar
 closeButton.addEventListener('click', function() {
     inputPanel.style.display = 'none';       // Oculta el panel
     highlightLayer.getSource().clear();      // Limpia el resaltado
     inputMedidor.value = "";                 // Limpia el input
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 // ============================ Búsqueda Medidores personalizada =========== FIN

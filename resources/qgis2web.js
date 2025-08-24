@@ -1494,7 +1494,7 @@ map.addControl(scaleLineControl); // agregamos desde el inicio
 var scaleLineElement = scaleLineControl.element;
 // Posición en la esquina inferior derecha
 scaleLineElement.style.bottom = "10px";
-scaleLineElement.style.left = "60px";
+scaleLineElement.style.left = "85px";
 scaleLineElement.style.position = "absolute"; // asegurar que funcione
 scaleLineElement.style.zIndex = "1000"; // opcional, para que quede arriba de otros elementos
 
@@ -1534,7 +1534,7 @@ rosaContainer.id = "rosaContainer";
 rosaContainer.style.display = "none"; // inicia oculto
 rosaContainer.style.position = "absolute";  // 🔹 Posición absoluta dentro del mapa
 rosaContainer.style.bottom = "60px";
-rosaContainer.style.left = "50px";
+rosaContainer.style.left = "75px";
 rosaContainer.style.zIndex = "1000";
 
 

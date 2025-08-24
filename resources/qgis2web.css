@@ -217,11 +217,21 @@ td video {
 
 .ol-zoom {
 	position: relative;
+    width: 30px;      /* ancho */
+    height: 57px;     /* alto */
     float: left;
     top: 50px;
     left: unset;
     margin-top: 8px;
     margin-left: 8px;
+}
+.ol-zoom button {
+    width: 28px;       /* ancho del botón */
+    height: 28px;      /* alto del botón */
+    font-size: 24px;   /* tamaño del icono */
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 
@@ -229,13 +239,26 @@ td video {
 .measure-control {
 	position: relative;
     float: left;
-    top: 53PX !important;
+    width: 30px;      /* ancho */
+    height: 30px;     /* alto */
+    top: 220PX !important;
     left: unset !important;
     margin-top: 8px;
     margin-left: 8px;
 	display: flex;
 }
-
+.measure-control button.fas.fa-ruler {
+    font-size: 20px;  /* aumenta el tamaño del ícono */
+    color: #000;      /* cambia color si quieres */
+}
+.measure-control button.fas.fa-ruler {
+    display: none !important;
+}
+.measure-control button {
+    font-size: 24px;  /* tamaño del 📏 */
+    line-height: 30px;
+    text-align: center;
+}
 .tooltip {
     position: relative;
     background: rgba(0, 0, 0, 0.5);
@@ -280,16 +303,22 @@ td video {
  .geolocate {
  position: relative !important;
  float: left;
+ width: 30px;      /* ancho */
+ height: 30px;     /* alto */
  top: 51px !important;
  left: unset !important;
  margin-top: 8px;
  margin-left: 8px;
+}
+.geolocate button {
+  font-size: 20px; /* hace más grande el ícono del marcador */
 }
 
 
 .ol-geocoder.gcd-gl-container {
     position: relative !important;
     float: left !important;
+    font-size: 24px;  /* tamaño del ícono (fa-search) */
     top: unset;
     left: unset;
 	margin-top: 8px;
@@ -306,7 +335,7 @@ td video {
 .search-layer {
 	position: relative !important;
     float: left;
-    top: 70px !important;
+    top: 80px !important;
     left: unset !important;
     margin-top: 8px;
     margin-left: 8px;
@@ -364,18 +393,19 @@ td video {
 	background-color: rgba(255,255,255,.4)!important;
 }
 
+
 .layer-switcher:hover{
 	background-color: rgba(255, 255, 255, .6)!important;
 }
 
-.layer-switcher .panel {
-	border: unset;
-	border-radius: unset;
-    float: right;
-    width: fit-content;
-	margin: 1px;
-	max-height: calc(100vh - 200px);
-    box-sizing: unset;
+.layer-switcher .panel::before {
+    content: "Simbología";
+    display: block;
+    text-align: center;
+    font-weight: bold;
+    font-size: 14px;
+    margin-bottom: 6px;
+    color: #000;
 }
 
 .layer-switcher.shown{
@@ -420,7 +450,7 @@ td video {
 
 .photon-geocoder-autocomplete.ol-unselectable.ol-control {
     position: relative !important;
-    top: 60px;   /* 20px desde abajo */
+    top: 15px;   /* 20px desde abajo */
     right: 0px;    /* 20px desde la derecha */
     z-index: 1500;  /* encima del mapa */
     width: 30px;      /* ancho del botón */
@@ -431,3 +461,4 @@ td video {
     height: 28px;     /* alto del botón */
     font-size: 24px;  /* tamaño del icono */
 }
+

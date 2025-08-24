@@ -64,15 +64,28 @@
         }
 
         .titleLogo {
-            height: 45px;
+            height: 50px;
             width: auto;
-            margin-right: 10px;
+            margin-left: 50px;    /* desplaza desde la izquierda
+            /*margin-right: 10px;
+             */
+            
+        }
+        .titleLema {
+            position: absolute; /* permite moverlo libremente */
+            top: 5px;           /* distancia desde la parte superior del contenedor */
+            right: 19px;        /* distancia desde el borde derecho */
+            height: 40px;
+            width: auto;
+            z-index: 10;        /* por si quieres que quede encima de otros elementos */
         }
 
         .project-title {
+            font-family: "Avenir Next", sans-serif; /* fallback a sans-serif si no se encuentra */
             color: rgb(14, 13, 13);
-            font-size: 20px;
+            font-size: 24px;
             font-weight: bold;
+            padding-left: 60px; /* separación desde el logo */
             margin: 0;
             white-space: nowrap;
         }
@@ -80,11 +93,11 @@
         
     </head>
     <body>
-            <!-- Cinta superior -->
+        <!-- Cinta superior -->
         <div class="titleRibbon">
             <img src="../images/logo.png" class="titleLogo" alt="Logo">
+            <img src="../images/lemal.png" class="titleLema" alt="Lema">
             <h2 class="project-title">Mapa de Capacidad de Alojamiento para Generación Distribuida</h2>
-            <!-- El botón de simbología puede flotar encima con z-index mayor -->
         </div>
         <div id="map">
             <div id="popup" class="ol-popup">

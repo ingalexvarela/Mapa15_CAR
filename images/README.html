@@ -1,75 +1,300 @@
-# Estudios de Penetración – Reglamento del 15 % Máxima Demanda  
-**Decreto Ejecutivo N.° 39220-MINAE – 14/09/2015**
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Uso del Mapa de Capacidad de Alojamiento</title>
+   <style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        line-height: 1.6;
+        background-color: #f9f9f9;
+        color: #333;
+    }
 
-Este repositorio alberga los estudios de penetración de generación distribuida para autoconsumo con fuentes renovables, desarrollados conforme al **Reglamento N.° 39220-MINAE**, también conocido como **Reglamento del 15 % Máxima Demanda**, que corresponde al *Reglamento de Generación Distribuida para Autoconsumo con Fuentes Renovables, Modelo de Contratación Medición Neta Sencilla*.
+    header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 20px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #1976d2;
+        background: linear-gradient(to right, white, #0059ff); /* Degradado blanco → azul */
+        color: #fff;
+        border-radius: 6px; /* opcional, hace más suave el borde */
+    }
 
-El objetivo es evaluar la capacidad máxima de alojamiento de generación distribuida en los circuitos eléctricos, garantizando que no se supere el límite del **15 % de la demanda máxima anual** por circuito, según lo establecido en el **Artículo 45** del reglamento.
+    header img {
+        height: 70px;
+    }
 
----
+    header .header-text {
+        text-align: right;
+    }
 
-## 📜 Marco Legal
-- **Reglamento aplicable:** Decreto Ejecutivo N.° 39220-MINAE  
-- **Fecha de emisión:** 14 de septiembre de 2015  
-- **Fecha de vigencia:** 8 de octubre de 2015  
-- **Enlace oficial:** [Texto completo en PGR Web](https://pgrweb.go.cr/scij/Busqueda/Normativa/Normas/nrm_texto_completo.aspx?param1=NRTC&nValor1=1&nValor2=80310&nValor3=101897&strTipM=TC)
+    header .header-text h1 {
+        margin: 0;
+        font-size: 20px;
+        color: #000; /* negro para contraste sobre el fondo claro */
+    }
 
----
+    header .header-text h2 {
+        margin: 2px 0 0 0;
+        font-size: 14px;
+        font-weight: normal;
+        color: #f1f1f1; /* claro para que resalte en el azul */
+    }
 
-## 📌 Límite del 15 % – Artículo 45
-El reglamento establece que:
+    h1 {
+        font-size: 24px;
+        color: #1976d2;
+    }
 
-> *La capacidad máxima de sistemas conectados a un mismo circuito no podrá exceder el **15 %** de la demanda máxima anual de dicho circuito.*
+    h2 {
+        font-size: 18px;
+        color: #1976d2;
+        margin-top: 20px;
+    }
 
-En este repositorio, el **criterio del 15 %** se utiliza para:
-- Calcular el límite máximo permitido de generación distribuida.
-- Evaluar la capacidad instalada actual.
-- Determinar la capacidad libre disponible para nuevos proyectos.
+    h3 {
+        font-size: 16px;
+        color: #444;
+        margin-top: 15px;
+    }
 
----
+    p, li {
+        font-size: 14px;
+    }
 
-## 📂 Contenido del Repositorio
-- `web/` → Página web **Mapa de Capacidad de Alojamiento para Generación Distribuida – Circuitos de COOPEALFARORUIZ R.L.**
-- `tablas/` → Tabla referente a la aplicación de los **Estudios 15 % Máxima Demanda [N.° 39220-MINAE]**.
-- `README.md` → Este documento.
+    pre {
+        background: #eee;
+        padding: 10px;
+        border-left: 3px solid #1976d2;
+        overflow-x: auto;
+    }
 
----
+    section {
+        margin-bottom: 25px;
+    }
 
-## ⚙️ Flujo de Trabajo
-1. Obtener los valores de demanda máxima anual por circuito.
-2. **Evaluación del 15 %:**  
-3. **Comparación con capacidad instalada:** Verificar si la capacidad existente supera el límite.
-4. **Generación del mapa de disponibilidad:** Mapa que muestren la disponibilidad de capacidad libre y el porcentaje de penetración por circuito.
-5. **Publicación en la web:** Actualizar el **Mapa de Capacidad** y la **tabla de resultados**.
+    a {
+        color: #1976d2;
+        text-decoration: none;
+    }
 
----
+    a:hover {
+        text-decoration: underline;
+    }
 
-## 📈 Ejemplo de Cálculo
-Si la demanda máxima anual de un circuito es **2 956,8 kW**, el 15 % equivale a:
-2 956,8 × 0,15 = 443,52 kW
+    ul {
+        margin-left: 20px;
+    }
+
+    hr {
+        border: 0;
+        border-top: 1px solid #ccc;
+        margin: 20px 0;
+    }
+    .main-title {
+    text-align: center; /* centra el contenido */
+    margin: 40px auto;  /* separa del resto */
+    max-width: 900px;   /* evita que quede demasiado ancho */
+    padding: 0 20px;    /* agrega espacio lateral */
+    }
+
+    .main-title h1 {
+        font-size: 2em;
+        color: #000000; /* azul corporativo */
+        margin-bottom: 15px;
+    }
+
+    .main-title hr {
+        margin: 0 auto; /* centra la línea */
+        border: 0;
+        border-top: 2px solid #1976d2;
+        width: 60%; /* ancho de la línea */
+    }
+</style>
+</head>
+<body>
+    
+<header> 
+    <img src="https://i.postimg.cc/brMPccpQ/logo.png" alt="Logo"> 
+    <div class="header-text">
+        <h1>Planificación del Sistema de Distribución</h1> 
+        <h2>COOPEALFARORUIZ R.L. – Departamento de Ingeniería Eléctrica</h2>
+    </div>
+</header>
+<div class="main-title">
+    <h1>Uso del Mapa de Capacidad de Alojamiento para Generación Distribuida</h1>
+    <hr>
+</div>
 
 
-Esto significa que la capacidad total de generación distribuida conectada a ese circuito no puede exceder **443,52 kW**.
+<section>
+    <h2 style="text-align:center; font-weight:bold; font-style:italic; font-size:28px; color:#1976d2;">
+    Cálculo de la Capacidad de Alojamiento
+    </h2>
 
----
 
-## 🌐 Salida del Proyecto
-El producto final de este repositorio es:
-- **Mapa de Capacidad de Alojamiento para Generación Distribuida – Circuitos de COOPEALFARORUIZ R.L.**
-- **Tabla de aplicación del criterio del 15 % Máxima Demanda** según el reglamento.
+    <h3>Capacidad de Alojamiento</h3>
+    <p>Es la capacidad máxima de cada circuito eléctrico del SEN para poder aceptar Recursos Energéticos Distribuidos (DER) sin que estos afecten su operación y sin afectar la calidad y confiabilidad del servicio eléctrico por su interacción con la red de distribución. Una vez que se alcanza esta capacidad instalada, la posibilidad de efectos adversos en la operación del circuito es alta. En el Decreto Ejecutivo N.° 39220-MINAE esta es calculada mediante el siguiente artículo.</p>
+    <blockquote style="border-left: 3px solid #1976d2; padding-left: 12px; color:#444; font-size:15px;">
+        <strong>Artículo 44 –</strong> La capacidad máxima de todos los sistemas de generación conectados en un mismo circuito, incluyendo 
+        el sistema propuesto, no deberá exceder el quince por ciento <strong>(15%)</strong> de la demanda máxima anual del circuito. Se considera demanda 
+        máxima como aquella medida a la salida de la subestación a la cual está conectado el circuito bajo condiciones de operación normal
+        del mismo. No se considera la potencia asociada a los circuitos de respaldo.
+    </blockquote>
+    
+    <p>La fórmula para calcular la capacidad máxima de sistemas conectados a un circuito es la siguiente:</p>
+    <pre>
+    Cmax(circuito n) = ∑(Capacidad Instalada DER) ≤ 15% * (Demanda máxima anual)
+    </pre>
+    
+    <p>Variables:</p>
+    <ul>
+        <li><strong>Capacidad máxima de sistemas conectados a un circuito (Cmax):</strong> La capacidad máxima de todos los sistemas de generación conectados en un mismo circuito no deberá exceder el 15 % de la demanda máxima anual del circuito.</li>
+        <li><strong>Capacidad Instalada DER:</strong> La capacidad instalada de cada generador distribuido conectada por circuito.</li>
+        <li><strong>Demanda máxima anual:</strong> Potencia máxima registrada en el año anterior por circuito, calculada con el dato de 15 minutos más alto del año.</li>
+    </ul>
 
-Ambos elementos permiten a ingenieros, planificadores y autoridades regulatorias evaluar rápidamente el estado de cada circuito y su capacidad de integración de generación distribuida.
+    <h2 style="text-align:center; font-weight:bold; font-style:italic; font-size:28px; color:#1976d2;">
+    Consulta en el Mapa
+    </h2>
 
----
+    <p>En el Mapa de Capacidad de Alojamiento, el usuario puede consultar la <strong>Capacidad máxima de sistemas conectados a un circuito (Cmax)</strong>, indicada como <strong>Capacidad Integración (kW)</strong>, así como el <strong>porcentaje libre disponible</strong>, mostrado como <strong>Capacidad Integración libre (% kW)</strong> para nuevas interconexiones.</p>
 
-## 🔗 Referencias
-- [Reglamento de Generación Distribuida para Autoconsumo con Fuentes Renovables – N.° 39220-MINAE](https://pgrweb.go.cr/scij/Busqueda/Normativa/Normas/nrm_texto_completo.aspx?param1=NRTC&nValor1=1&nValor2=80310&nValor3=101897&strTipM=TC)  
-- Artículo 45 – **Capacidad máxima de sistemas conectados a un mismo circuito (15 %)**.
+    <p>Para hacer la consulta puede hacerlo mediante los controles que permiten la navegación mediante botones o bien con el ratón, de forma similar a los mapas satelitales de navegación.
+    Al seleccionar el objeto que desea, se muestra la ventanilla con los atributos del mismo, donde en este caso el atributo de la línea de distribución primaria muestra una capacidad de alojamiento de hasta 394.34 kW.</p>
+    <div style="text-align:center; margin:15px 0;">
+        <img src="https://i.postimg.cc/R0tV9T0k/consulta1.png" alt="Consulta en el mapa" style="max-width:100%; border:1px solid #ccc; border-radius:5px;">
+    </div>
 
----
+    <p>Esta información permite realizar solicitudes conforme al <strong>Artículo 21</strong>, que establece:</p>
+        <blockquote style="border-left: 3px solid #1976d2; padding-left: 12px; color:#444; font-size:15px;">
+        <strong>Artículo 21 –Solicitud de disponibilidad de potencia en el circuito.</strong> Para instalar un sistema de generación interconectado a la red de distribución, el abonado presentará a la empresa distribuidora una solicitud para el
+         estudio de disponibilidad de potencia en el circuito. Se permitirá la cantidad de interconexiones de acuerdo a la capacidad máxima permitida en un circuito.
+    </blockquote>
 
-## 📇 Contacto
-- **Ing. Alex Alberto Varela Quirós**
-- ***Gestor de Redes Eléctricas  / Departamento de Ingeniería Eléctrica***
-- **COOPEALFARORUIZ R.L.**  
-- 📧 avarela@coopealfaroruiz.com  / 📞 +506 84634021  
----
+    <p>La capacidad de una sección es dependiente del momento en el que se haya realizado
+el análisis, por lo que, siguiendo el ejemplo anterior, si un DER de 394.34 kW. se instala en
+dicha ubicación, se actualizará el mapa de capacidad de alojamiento para reflejar el
+efecto de dicho DER en el circuito y los efectos en la capacidad de integración de sus
+alrededores.</p>
+</section>
+
+<section>
+    <h2 style="text-align:center; font-weight:bold; font-style:italic; font-size:28px; color:#1976d2; margin-bottom:15px;">
+        Uso del mapa
+    </h2>
+
+    <p style="text-align:justify; font-size:16px; line-height:1.6;">
+        A continuación, se muestra un detalle sobre los elementos que se encuentran en el 
+        <strong>Mapa de Capacidad de Alojamiento para Generación Distribuida</strong>.
+    </p>
+
+    <!-- Imagen principal del mapa con numeraciones -->
+<div style="text-align:center; margin:20px 0;">
+    <img src="https://i.postimg.cc/Jn5GjQZf/Mapase-a.png" alt="Mapa principal" style="max-width:90%; border:1px solid #ccc; border-radius:8px; box-shadow:0px 2px 6px rgba(0,0,0,0.2);">
+    <p style="font-size:14px; color:#555; margin-top:5px;">
+        Figura 1. Mapa con numeración de elementos (1 al 10).
+    </p>
+</div>
+
+<!-- Lista numerada de elementos -->
+<ol style="font-size:17px; line-height:1.8; list-style:none; padding-left:0;">
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">1.</span> 
+        <strong>Mapa con los circuitos:</strong> Contiene los distritos del área servida por COOPEALFARORUIZ R.L, la ubicación de las subestaciones y los mapas de capacidad de alojamiento correspondientes al reglamento N.° 39220-MINAE.
+        <div style="text-align:center; margin:10px 0;">
+<a href='https://postimg.cc/XrN7Y9Pd' target='_blank'><img src='https://i.postimg.cc/XrN7Y9Pd/Bmapa.png' border='0' alt='Bmapa'/></a>        </div>
+    </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">2.</span> 
+        <strong>Botón de simbología:</strong> Al hacer clic en este botón, se despliega una ventana emergente que muestra la leyenda utilizada en el mapa.
+        <div style="text-align:center; margin:10px 0;">
+                <img src="https://i.postimg.cc/8CG7Y6Z1/Bsimbologia.png" alt="Botón simbología" style="max-width:150px;">
+            </div>
+    </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">3.</span> 
+        <strong>Botón de créditos y atribuciones:</strong> Muestra la información de autorías y créditos de las capas de información utilizadas en el mapa.
+        <div style="text-align:center; margin:10px 0;">
+            <img src="https://i.postimg.cc/GmFfRWxk/Credi2.png" alt="Mapa principal" style="max-width:90%; border:1px solid #ccc; border-radius:8px; box-shadow:0px 2px 6px rgba(0,0,0,0.2);">
+        </div>
+    </li>
+
+    
+    <h3 style="text-align:left; color:#444; margin-top:25px;">Controles del mapa</h3>
+    <p style="font-size:16px; text-align:justify; line-height:1.6;">
+        Los controles permiten la navegación mediante botones o bien con el ratón, de forma similar a los mapas satelitales de navegación.
+    </p>
+    <div style="text-align:left; margin:15px 0;">
+        <img src="https://i.postimg.cc/Hkvpw8FZ/Botoneshori.png" alt="Controles del mapa" style="max-width:90%; border:1px solid #ccc; border-radius:6px;">
+    </div>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">4.</span> <strong>Botones de zoom:</strong> Permiten acercar o alejar el mapa.</li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">5.</span> <strong>Ubicación del usuario:</strong> Centra el mapa en la ubicación actual.
+        </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">6.</span> <strong>Búsqueda por dirección:</strong> Permite localizar una dirección específica dentro del mapa.
+            <div style="text-align:center; margin:10px 0;">
+                        <img src="https://i.postimg.cc/QtkwqRH8/Bdirec.png" alt="Controles del mapa" style="max-width:90%; border:1px solid #ccc; border-radius:6px;">
+            </div>
+    </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">7.</span> <strong>Búsqueda por medidor:</strong> Herramienta para localizar un medidor específico.
+        <div style="text-align:center; margin:10px 0;">
+            <img src="https://i.postimg.cc/ZnwQGp8X/Bmedidor.png" alt="Controles del mapa" style="max-width:90%; border:1px solid #ccc; border-radius:6px;">
+        </div>
+    </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">8.</span> <strong>Medición:</strong> Permite medir distancias o áreas dentro del mapa.
+        <div style="text-align:center; margin:10px 0;">
+                    <img src="https://i.postimg.cc/4yfM2B9z/Bmedida.png" alt="Botón medida" style="max-width:150px;">
+        </div>
+    </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">9.</span> <strong>Escala:</strong> Muestra la escala del mapa.
+        <div style="text-align:center; margin:10px 0;">
+                    <img src="https://i.postimg.cc/MZ3jGXpD/Bescala.png" alt="Escala" style="max-width:150px;">
+                </div>
+    </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">10.</span> <strong>Brújula:</strong> Indica la orientación del mapa mediante una rosa de los vientos.
+        <div style="text-align:center; margin:10px 0;">
+                    <img src="https://i.postimg.cc/8s3cx6j4/rosaT.png" alt="Rosa de los vientos" style="max-width:120px;">
+                </div>
+    </li>
+
+    <li><span style="color:#d32f2f; font-weight:bold; font-size:20px;">11.</span> <strong>Ayuda:</strong> Proporciona información adicional y redirige a este documento.</li>
+</ol>
+
+
+    <hr style="margin:30px 0; border:0; border-top:2px solid #1976d2;">
+
+    <h3 style="text-align:center; font-weight:bold; font-size:20px; color:#1976d2;">
+        Nota de Aclaración
+    </h3>
+    <h4 style="text-align:center; color:#555; margin-top:5px;">
+        Estudios de Penetración – Reglamento del 15 % Máxima Demanda<br>
+        Decreto Ejecutivo N.° 39220-MINAE – 14/09/2015
+    </h4>
+
+    <p style="text-align:justify; font-size:16px; line-height:1.6;">
+        El objetivo es evaluar la capacidad máxima de alojamiento de generación distribuida en los circuitos eléctricos, garantizando que no se supere el límite del 
+        <strong>15 % de la demanda máxima anual</strong> por circuito, según lo establecido en el <strong>Artículo 44</strong> del reglamento.
+    </p>
+
+    <p style="font-size:16px;">En este estudio, el criterio del 15 % se utiliza para:</p>
+    <ul style="font-size:16px; line-height:1.6;">
+        <li>Calcular el límite máximo permitido de generación distribuida.</li>
+        <li>Evaluar la capacidad instalada actual.</li>
+        <li>Determinar la capacidad libre disponible para nuevos proyectos.</li>
+    </ul>
+    
+    <h3>Marco Legal</h3> <ul> <li><strong>Reglamento aplicable:</strong> Decreto Ejecutivo N.° 39220-MINAE</li> <li><strong>Fecha de emisión:</strong> 14 de septiembre de 2015</li> <li><strong>Fecha de vigencia:</strong> 8 de octubre de 2015</li> <li><strong>Enlace oficial:</strong> <a href="https://pgrweb.go.cr/scij/Busqueda/Normativa/Normas/nrm_texto_completo.aspx?param1=NRTC&nValor1=1&nValor2=80310&nValor3=101897&strTipM=TC">Texto completo en PGR Web</a></li> </ul>
+
+</section>
+</body>
+</html>

@@ -1414,8 +1414,8 @@ function buscarMedidor() {
     });
 
     if (!encontrado) {
-        alert('Medidor no encontrado: ' + valor);
-        return;
+    mostrarMensaje("⚠️ Medidor no encontrado: " + valor);
+    return;
     }
 
     // Clonar y etiquetar
@@ -1457,6 +1457,17 @@ closeButton.addEventListener('click', function() {
     inputMedidor.value = "";                 // Limpia el input
 });
 
+function mostrarMensaje(texto, color="#d9534f") {
+    var msg = document.getElementById("mensajeBusqueda");
+    msg.innerText = texto;
+    msg.style.background = color;
+    msg.style.display = "block";
+
+    // Ocultar automáticamente después de 3 segundos
+    setTimeout(function() {
+        msg.style.display = "none";
+    }, 3000);
+}
 
 
 

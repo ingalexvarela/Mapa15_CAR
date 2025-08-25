@@ -22,9 +22,9 @@ var lyr_Territorio_car_1 = new ol.layer.Vector({
                 declutter: false,
                 source:jsonSource_Territorio_car_1, 
                 style: style_Territorio_car_1,
-                popuplayertitle: 'Territorio_car',
+                popuplayertitle: 'Límite del servicio Coopealfaroruiz',
                 interactive: true,
-                title: '<img src="styles/legend/Territorio_car_1.png" /> Territorio_car'
+                title: '<img src="styles/legend/Territorio_car_1.png" /> Territorio COOPEALFARORUIZ R.L.'
             });
 var format_MedidoresF_2 = new ol.format.GeoJSON();
 var features_MedidoresF_2 = format_MedidoresF_2.readFeatures(json_MedidoresF_2, 
@@ -67,9 +67,9 @@ var lyr_Distritos_dentro_car_3 = new ol.layer.Vector({
                 declutter: false,
                 source:jsonSource_Distritos_dentro_car_3, 
                 style: style_Distritos_dentro_car_3,
-                popuplayertitle: 'Distritos_dentro_car',
+                popuplayertitle: 'Distrito Servicio CAR',
                 interactive: true,
-                title: '<img src="styles/legend/Distritos_dentro_car_3.png" /> Distritos_dentro_car'
+                title: '<img src="styles/legend/Distritos_dentro_car_3.png" /> Distritos Servicio (CAR)'
             });
 var format_CircuitosSecundarios_4 = new ol.format.GeoJSON();
 var features_CircuitosSecundarios_4 = format_CircuitosSecundarios_4.readFeatures(json_CircuitosSecundarios_4, 
